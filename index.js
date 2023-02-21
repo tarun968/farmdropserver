@@ -2,10 +2,12 @@ const express = require('express')
 require('dotenv').config()
 const bodyParser = require('body-parser')
 const cors = require('cors')
+var path = require('path')
 const mongoose = require('mongoose')
 const { ObjectId } = mongoose.Schema
 const cookieParser = require('cookie-parser')
 const app = express()
+
 // var formidable = require("formidable");
 app.use(cookieParser());
 const ProductModel = require('./PRODUCTS/productsDB')

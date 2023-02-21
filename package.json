@@ -24,6 +24,7 @@
     "lodash": "^4.17.21",
     "module": "^1.2.5",
     "mongoose": "^6.6.2",
+    "path": "^0.12.7",
     "razorpay": "^2.8.3"
   },
   "devDependencies": {
