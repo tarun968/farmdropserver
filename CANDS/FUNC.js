@@ -1,4 +1,4 @@
-const newsModel = require('../NEWS/filedbs')
+const newsModel = require('../INFO/filedbs')
 var userModel = require('./filemws')
 const jwt = require('jsonwebtoken')
 const { OAuth2Client, UserRefreshClient } = require('google-auth-library')

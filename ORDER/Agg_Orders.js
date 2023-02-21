@@ -1,9 +1,9 @@
-const { NewsComment } = require('../NEWS/FUNC');
+const { NewsComment } = require('../INFO/FUNC');
 var { Order } = require('./ordersdb')
 const Razorpay = require('razorpay')
 const crypto = require('crypto')
-var userModel = require('../USER/filemws')
-const ProductModel = require('../PRODUCTS/productsDB')
+var userModel = require('../CANDS/filemws')
+const ProductModel = require('../PRODUCT/productsDB')
 exports.updateStatus = (req, res) => {
     console.log("Here we come and welcome,fjelferl", req.body, req.body.status)
     Order.updateOne(

@@ -1,9 +1,9 @@
-const { NewsComment } = require('../NEWS/FUNC');
+const { NewsComment } = require('../INFO/FUNC');
 var { Order } = require('./ordersdb')
 const Razorpay = require('razorpay')
 const crypto = require('crypto')
-var userModel = require('../USER/filemws')
-const ProductModel = require('../PRODUCTS/productsDB')
+var userModel = require('../CANDS/filemws')
+const ProductModel = require('../PRODUCT/productsDB')
 exports.getOrderById = (req, res, next, id) => {
     console.log("order id ",id)
     Order.findById(id)

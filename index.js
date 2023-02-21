@@ -10,7 +10,7 @@ const app = express()
 
 // var formidable = require("formidable");
 app.use(cookieParser());
-const ProductModel = require('./PRODUCTS/productsDB')
+const ProductModel = require('./PRODUCT/productsDB')
 const formidable = require('formidable')
 const _ = require('lodash')
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -38,21 +38,21 @@ mongoose.connect(conn,
 
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
-const Auths = require('./USER/fileroutes')
-const { getUserByEmail, getAllUsers, updateUser, getUserEmail, getUserDetails } = require('./USER/FUNC')
-const { Feedback, RatingCalc, getPhoto, productDelete } = require('./PRODUCTS/FUNC')
+const Auths = require('./CANDS/fileroutes')
+const { getUserByEmail, getAllUsers, updateUser, getUserEmail, getUserDetails } = require('./CANDS/FUNC')
+const { Feedback, RatingCalc, getPhoto, productDelete } = require('./PRODUCT/FUNC')
 const { AddingNews, NewsComment, getNewsbyId,
-    SubmitFormNews, getAllnews, getPhotoNews, getNewstoFront } = require('./NEWS/FUNC')
-const { SubmitForm, UpdateForm } = require('./PRODUCTS/FORM')
-const { FindbyName, FindbyAdder, FindbyID, FindbyRating, FindAll } = require('./PRODUCTS/AGG')
-const { createOrder, pushOrderInPurchaseList, updateStock, orderinit, orderverify, getOrderById } = require('./ORDERS/FUNC')
-const { getProductbyId } = require('./PRODUCTS/FUNC')
+    SubmitFormNews, getAllnews, getPhotoNews, getNewstoFront } = require('./INFO/FUNC')
+const { SubmitForm, UpdateForm } = require('./PRODUCT/FORM')
+const { FindbyName, FindbyAdder, FindbyID, FindbyRating, FindAll } = require('./PRODUCT/AGG')
+const { createOrder, pushOrderInPurchaseList, updateStock, orderinit, orderverify, getOrderById } = require('./ORDER/FUNC')
+const { getProductbyId } = require('./PRODUCT/FUNC')
 const { getShopbyID, getAllshopBycountry,
     getAllImages, SubmitLocation, SubmitLocationsImage,
-    getImageOne, getPhotoofImage, getShopOwnerById } = require('./LOCATIONS/FUNC')
-const { userPurchaseList } = require('./ORDERS/FUNC')
-const { getAllOrderstoAdmin, getAorder,getStatus,updateStatus } = require('./ORDERS/Agg_Orders')
-const { googlesignin } = require('./USER/FUNC')
+    getImageOne, getPhotoofImage, getShopOwnerById } = require('./AREAS/FUNC')
+const { userPurchaseList } = require('./ORDER/FUNC')
+const { getAllOrderstoAdmin, getAorder,getStatus,updateStatus } = require('./ORDER/Agg_Orders')
+const { googlesignin } = require('./CANDS/FUNC')
 const { isAuthenticated, isAdmin, isSignedIn } = require('./METHODS/AUTH')
 
 
