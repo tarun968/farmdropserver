@@ -5,6 +5,7 @@ var userModel = require('./filemws')
 const { check, validationResult } = require('express-validator');
 router.post('/signin', async (req, res) => {
     try {
+        console.log("login me ")
         const record_to_find = await userModel.findOne({
             Email: req.body.email, Password: req.body.password
         })
