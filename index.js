@@ -7,8 +7,6 @@ const mongoose = require('mongoose')
 const { ObjectId } = mongoose.Schema
 const cookieParser = require('cookie-parser')
 const app = express()
-
-// var formidable = require("formidable");
 app.use(cookieParser());
 const ProductModel = require('./PRODUCT/productsDB')
 const formidable = require('formidable')
@@ -20,12 +18,9 @@ app.use(express.static("public"));
 app.use(express.json());
 const corsOptions = {
     origin: '*',
-    // credentials:true,            
-    // optionSuccessStatus:200,
 }
 app.use(cors(corsOptions))
 const fs = require('fs')
-// const bodyParser = require('body-parser')
 const { resolveSrv } = require('dns')
 // mongodb+srv://tarunsinha968:<password>@cluster0.qagmwmn.mongodb.net/?retryWrites=true&w=majority
 const conn = 'mongodb+srv://' + process.env.USNAME + ':' + process.env.PASSWORD + '@cluster0.qagmwmn.mongodb.net/?retryWrites=true&w=majority'
@@ -35,12 +30,12 @@ mongoose.connect(conn,
 // app.use(express.urlencoded({ extended: false }));
 // app.use(express.json({extended:false}))
 // app.use(bodyParser.json({extended:true}))
-
+import { getShopbyID } from './AREAS/FUNC'
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 const Auths = require('./CANDS/fileroutes')
 const { googlesignin } = require('./CANDS/FUNC')
-const { getShopbyID, getAllshopBycountry,
+const { getAllshopBycountry,
     getAllImages, SubmitLocation, SubmitLocationsImage,
     getImageOne, getPhotoofImage, getShopOwnerById } = require('./AREAS/FUNC')
 const { userPurchaseList } = require('./ORDER/FUNC')
