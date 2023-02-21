@@ -39,22 +39,24 @@ mongoose.connect(conn,
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 const Auths = require('./CANDS/fileroutes')
-const { getUserByEmail, getAllUsers, updateUser, getUserEmail, getUserDetails } = require('./CANDS/FUNC')
-const { Feedback, RatingCalc, getPhoto, productDelete } = require('./PRODUCT/FUNC')
+const { getShopbyID, getAllshopBycountry,
+    getAllImages, SubmitLocation, SubmitLocationsImage,
+    getImageOne, getPhotoofImage, getShopOwnerById } = require('./AREAS/FUNC')
+const { userPurchaseList } = require('./ORDER/FUNC')
+const { getAllOrderstoAdmin, getAorder,
+    getStatus,updateStatus } = require('./ORDER/Agg_Orders')
+const { googlesignin } = require('./CANDS/FUNC')
+const { isAuthenticated, isAdmin, isSignedIn } = require('./METHODS/AUTH')
+
+const { getUserByEmail, getAllUsers, updateUser, 
+    getUserEmail, getUserDetails } = require('./CANDS/FUNC')
 const { AddingNews, NewsComment, getNewsbyId,
     SubmitFormNews, getAllnews, getPhotoNews, getNewstoFront } = require('./INFO/FUNC')
 const { SubmitForm, UpdateForm } = require('./PRODUCT/FORM')
 const { FindbyName, FindbyAdder, FindbyID, FindbyRating, FindAll } = require('./PRODUCT/AGG')
 const { createOrder, pushOrderInPurchaseList, updateStock, orderinit, orderverify, getOrderById } = require('./ORDER/FUNC')
 const { getProductbyId } = require('./PRODUCT/FUNC')
-const { getShopbyID, getAllshopBycountry,
-    getAllImages, SubmitLocation, SubmitLocationsImage,
-    getImageOne, getPhotoofImage, getShopOwnerById } = require('./AREAS/FUNC')
-const { userPurchaseList } = require('./ORDER/FUNC')
-const { getAllOrderstoAdmin, getAorder,getStatus,updateStatus } = require('./ORDER/Agg_Orders')
-const { googlesignin } = require('./CANDS/FUNC')
-const { isAuthenticated, isAdmin, isSignedIn } = require('./METHODS/AUTH')
-
+const { Feedback, RatingCalc, getPhoto, productDelete } = require('./PRODUCT/FUNC')
 
 
 
