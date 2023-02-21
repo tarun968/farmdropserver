@@ -4,7 +4,6 @@ const fs = require('fs')
 // const bodyParser = require('body-parser')
 const { resolveSrv } = require('dns')
 
-
 exports.getShopbyID = (req, res, next, id) => {
     console.log("id", id)
     ShopModel.findOne({ _id: id }).exec((error, shop) => {
