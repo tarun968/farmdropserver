@@ -40,7 +40,6 @@ app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 const Auths = require('./USER/fileroutes')
 const { getUserByEmail, getAllUsers, updateUser, getUserEmail, getUserDetails } = require('./USER/FUNC')
-const { isAuthenticated, isAdmin, isSignedIn } = require('./METHODS/AUTH')
 const { Feedback, RatingCalc, getPhoto, productDelete } = require('./PRODUCTS/FUNC')
 const { AddingNews, NewsComment, getNewsbyId,
     SubmitFormNews, getAllnews, getPhotoNews, getNewstoFront } = require('./NEWS/FUNC')
@@ -54,7 +53,7 @@ const { getShopbyID, getAllshopBycountry,
 const { userPurchaseList } = require('./ORDERS/FUNC')
 const { getAllOrderstoAdmin, getAorder,getStatus,updateStatus } = require('./ORDERS/Agg_Orders')
 const { googlesignin } = require('./USER/FUNC')
-
+const { isAuthenticated, isAdmin, isSignedIn } = require('./METHODS/AUTH')
 
 
 
