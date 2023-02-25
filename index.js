@@ -32,27 +32,28 @@ mongoose.connect(conn,
 // app.use(express.json({extended:false}))
 // app.use(bodyParser.json({extended:true}))
 // import { getShopbyID } from './AREAS/FUNC'
+// const abc = require('./AREAS/func')
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 const Auths = require('./CANDS/fileroutes')
-const { googlesignin } = require('./CANDS/FUNC')
+const { googlesignin } = require('./CANDS/func')
 const { getAllshopBycountry,
     getAllImages, SubmitLocation, SubmitLocationsImage,
-    getImageOne, getPhotoofImage, getShopOwnerById,getShopbyID } = require('./AREAS/FUNC')
-const { userPurchaseList } = require('./ORDER/FUNC')
+    getImageOne, getPhotoofImage, getShopOwnerById,getShopbyID } = require('./AREAS/func.js')
+const { userPurchaseList } = require('./ORDER/func.js')
 const { getAllOrderstoAdmin, getAorder,
-    getStatus,updateStatus } = require('./ORDER/Agg_Orders')
-const { isAuthenticated, isAdmin, isSignedIn } = require('./METHODS/AUTH')
+    getStatus,updateStatus } = require('./ORDER/aggorders')
+const { isAuthenticated, isAdmin, isSignedIn } = require('./METHODS/auth')
 
 const { getUserByEmail, getAllUsers, updateUser, 
-    getUserEmail, getUserDetails } = require('./CANDS/FUNC')
+    getUserEmail, getUserDetails } = require('./CANDS/func')
 const { AddingNews, NewsComment, getNewsbyId,
-    SubmitFormNews, getAllnews, getPhotoNews, getNewstoFront } = require('./INFO/FUNC')
-const { SubmitForm, UpdateForm } = require('./PRODUCT/FORM')
-const { FindbyName, FindbyAdder, FindbyID, FindbyRating, FindAll } = require('./PRODUCT/AGG')
-const { createOrder, pushOrderInPurchaseList, updateStock, orderinit, orderverify, getOrderById } = require('./ORDER/FUNC')
-const { getProductbyId } = require('./PRODUCT/FUNC')
-const { Feedback, RatingCalc, getPhoto, productDelete } = require('./PRODUCT/FUNC')
+    SubmitFormNews, getAllnews, getPhotoNews, getNewstoFront } = require('./INFO/func')
+const { SubmitForm, UpdateForm } = require('./PRODUCT/form')
+const { FindbyName, FindbyAdder, FindbyID, FindbyRating, FindAll } = require('./PRODUCT/agg')
+const { createOrder, pushOrderInPurchaseList, updateStock, orderinit, orderverify, getOrderById } = require('./ORDER/func.js')
+const { getProductbyId } = require('./PRODUCT/func')
+const { Feedback, RatingCalc, getPhoto, productDelete } = require('./PRODUCT/func')
 
 
 

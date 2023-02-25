@@ -1,4 +1,4 @@
-const { NewsComment } = require('../INFO/FUNC');
+const { NewsComment } = require('../INFO/func');
 var { Order } = require('./ordersdb')
 const Razorpay = require('razorpay')
 const crypto = require('crypto')
