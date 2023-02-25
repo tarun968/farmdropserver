@@ -2,6 +2,7 @@ const newsModel = require('./filedbs')
 const formidable = require('formidable')
 const _ = require('lodash')
 const fs = require('fs')
+// 
 exports.getNewsbyId = (req, res, next, id) => {
     console.log("lets get the new by id")
     newsModel.findOne({ _id: id }).exec((err, news) => {

@@ -67,7 +67,7 @@ exports.getAllUsers = (req, res) => {
         res.status(200).json(users)
     })
 }
-
+// 
 exports.updateUser = (req, res) => {
     userModel.findByIdAndUpdate({ _id: req.profile._id },
         { $set: req.body }

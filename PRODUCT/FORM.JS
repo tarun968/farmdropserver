@@ -1,6 +1,7 @@
 const ProductModel = require('./productsDB')
 const formidable = require('formidable')
 const _ = require('lodash')
+// 
 const fs = require('fs')
 exports.UpdateForm = (req, res) => {
     console.log("update products")

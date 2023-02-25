@@ -1,5 +1,5 @@
 const ProductModel = require('./productsDB')
-
+// 
 exports.FindAll = async (req,res) =>{
     const data = await ProductModel.find({})
     console.log("",data[0].ProductID)
