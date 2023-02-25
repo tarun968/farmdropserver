@@ -5,6 +5,7 @@ const cors = require('cors')
 var path = require('path')
 const mongoose = require('mongoose')
 const { ObjectId } = mongoose.Schema
+const PORT = process.env.PORT || 5000
 const cookieParser = require('cookie-parser')
 const app = express()
 app.use(cookieParser());
@@ -113,6 +114,6 @@ app.post("/order-purchase/:adder", isSignedIn, isAuthenticated, pushOrderInPurch
 app.post("/add-shop/:adder", isSignedIn, isAuthenticated, isAdmin, SubmitLocation)
 app.post("/update-shop/:location/by/:adder", isSignedIn, isAuthenticated, isAdmin, SubmitLocationsImage)
 app.use("/", Auths)
-app.listen(5000, () => {
+app.listen(PORT, () => {
     console.log("On the port 5000")
 })
