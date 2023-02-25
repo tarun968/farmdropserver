@@ -36,13 +36,13 @@ mongoose.connect(conn,
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 const Auths = require('./CANDS/fileroutes')
-const { googlesignin } = require('./CANDS/func')
+const { googlesignin } = require('./CANDS/func.js')
 const { getAllshopBycountry,
     getAllImages, SubmitLocation, SubmitLocationsImage,
     getImageOne, getPhotoofImage, getShopOwnerById,getShopbyID } = require('./AREAS/func.js')
 const { userPurchaseList } = require('./ORDER/func.js')
 const { getAllOrderstoAdmin, getAorder,
-    getStatus,updateStatus } = require('./ORDER/aggorders')
+    getStatus,updateStatus } = require('./ORDER/aggorders.js')
 const { isAuthenticated, isAdmin, isSignedIn } = require('./METHODS/auth')
 
 const { getUserByEmail, getAllUsers, updateUser, 
