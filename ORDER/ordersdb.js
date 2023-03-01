@@ -21,6 +21,10 @@ const Orders = new Schema({
     },
     amount:{type:Number},
     address:String,
+    Date: {
+        type: Date,
+        required: true
+    },
     user:{
         type:ObjectId,
         ref:"User"

@@ -20,6 +20,14 @@ exports.getOrderById = (req, res, next, id) => {
 }
 exports.userPurchaseList = (req, res) => {
     console.log('user with the purchase', req.profile)
+    // Order.deleteMany({})
+    // Order.deleteMany({})
+    //     .exec((err, order) => {
+    //         if (err) {
+    //             return res.status(400).json({ error: 'NO ORDER IN THIS ACCOUNT' })
+    //         }
+    //         return res.json(order)
+    //     })
     Order.find({ user: req.profile._id })
         .exec((err, order) => {
             if (err) {
@@ -31,11 +39,13 @@ exports.userPurchaseList = (req, res) => {
 
 exports.createOrder = (req, res) => {
 
-    console.log("entering the createorder",req.profile)
+    console.log("entering the createorder",req.profile,req.body)
     req.body.order.user = req.profile
+    var amount = 0;
     const order = new Order()
     req.body.order.forEach(element => {
         console.log("element fof the order",element)
+        amount += element.Count* element.Price
         order.products.push({
         _id:element._id,
         name:element.NameofProduct,
@@ -43,8 +53,9 @@ exports.createOrder = (req, res) => {
         price:element.Price
         })
     });
-    order.amount = req.body.amount
+    order.amount = amount
     order.user = req.profile._id
+    order.Date = new Date()
     order.status = "Processing"
     order.save((err, order) => {
         if (err || !order) {
