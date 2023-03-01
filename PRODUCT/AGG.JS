@@ -1,8 +1,9 @@
 const ProductModel = require('./productsDB')
 // 
 exports.FindAll = async (req,res) =>{
-    const data = await ProductModel.find({})
-    console.log("",data[0].ProductID)
+    // await ProductModel.deleteMany()
+    const data = await ProductModel.find({}).limit(6)
+    console.log(data)
     if(!data){
         return res.json({error:'Error in the database'})
     }

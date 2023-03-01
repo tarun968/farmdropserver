@@ -1,7 +1,11 @@
 const express = require('express')
 require('dotenv').config()
 const bodyParser = require('body-parser')
+
+const { v4: uuidv4 } = require('uuid');
 const cors = require('cors')
+const multer = require('multer')
+const sharp = require('sharp')
 var path = require('path')
 const mongoose = require('mongoose')
 const { ObjectId } = mongoose.Schema
@@ -12,6 +16,12 @@ app.use(cookieParser());
 const ProductModel = require('./PRODUCT/productsDB')
 const formidable = require('formidable')
 const _ = require('lodash')
+const cloudinary = require('cloudinary').v2;
+cloudinary.config({
+  cloud_name: "dgfbgtpnd",
+  api_key: "965393114688289",
+  api_secret: "HNoDURoP_26gNFUb9pY8KPKKpZ0"
+});
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: false }));
 // 
@@ -23,6 +33,28 @@ const corsOptions = {
 app.use(cors(corsOptions))
 const fs = require('fs')
 const { resolveSrv } = require('dns')
+if (!fs.existsSync("./uploads")) {
+    fs.mkdirSync("./uploads");
+}
+  
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'uploads');
+    },
+    filename: function(req, file, cb) {   
+        cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
+
+
+
+let upload = multer({ storage});
+// var upload = multer({dest:'./upload/'});
+cloudinary.config({
+    cloud_name: "dgfbgtpnd",
+    api_key: "965393114688289",
+    api_secret: "HNoDURoP_26gNFUb9pY8KPKKpZ0"
+  });
 // mongodb+srv://tarunsinha968:<password>@cluster0.qagmwmn.mongodb.net/?retryWrites=true&w=majority
 const conn = 'mongodb+srv://' + process.env.USNAME + ':' + process.env.PASSWORD + '@cluster0.qagmwmn.mongodb.net/?retryWrites=true&w=majority'
 mongoose.connect(conn,
@@ -49,7 +81,7 @@ const { getUserByEmail, getAllUsers, updateUser,
     getUserEmail, getUserDetails } = require('./CANDS/func')
 const { AddingNews, NewsComment, getNewsbyId,
     SubmitFormNews, getAllnews, getPhotoNews, getNewstoFront } = require('./INFO/func')
-const { SubmitForm, UpdateForm } = require('./PRODUCT/form')
+const { SubmitForm, UpdateForm, SubmitForm2 } = require('./PRODUCT/form')
 const { FindbyName, FindbyAdder, FindbyID, FindbyRating, FindAll } = require('./PRODUCT/agg')
 const { createOrder, pushOrderInPurchaseList, updateStock, orderinit, orderverify, getOrderById } = require('./ORDER/func.js')
 const { getProductbyId } = require('./PRODUCT/func')
@@ -82,7 +114,7 @@ app.put("/update/status/admin/:adder", isSignedIn,isAuthenticated,updateStatus)
 
 app.post("/update-product/:product/item/:adder", isSignedIn, isAuthenticated, isAdmin, UpdateForm)
 app.get("/All-Products/:adder", isSignedIn, isAuthenticated, isAdmin, FindAll)
-app.get("/Products/", FindAll)
+app.get("/Products", FindAll)
 app.get("/Photo/:product", getPhoto)
 app.get("/Orders/admin/:adder", isSignedIn, isAuthenticated, isAdmin, getAllOrderstoAdmin)
 app.get("/News/:news", getNewstoFront)
@@ -105,6 +137,7 @@ app.get("/productsbyRating", FindbyRating)
 app.get("/shopsbycountry", getAllshopBycountry)
 app.get("/all-images/:adder", isSignedIn, isAuthenticated, getAllImages)
 app.post("/add-product/:adder", isSignedIn, isAuthenticated, isAdmin, SubmitForm)
+app.post("/add-productNew/:adder", isSignedIn, isAuthenticated, isAdmin,upload.single("ImageProduct"), SubmitForm2)
 
 
 app.post("/payment/:adder/product", isSignedIn, isAuthenticated, orderinit)

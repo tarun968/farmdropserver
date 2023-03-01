@@ -36,9 +36,16 @@ const Products = new Schema({
         required:true,
         type:Number
     },
-    ImageProduct:{
-        data:Buffer,
-        contentType:String
+    ImageProduct: {
+        public_id: {
+            type: String,
+            required: true
+        },
+        url: {
+            type: String,
+            required: true
+        }
+    
     },
     Quantity:{
         type:Number,
