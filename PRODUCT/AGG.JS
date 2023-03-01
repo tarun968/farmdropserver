@@ -1,12 +1,13 @@
 const ProductModel = require('./productsDB')
 // 
 exports.FindAll = async (req,res) =>{
-    // await ProductModel.deleteMany()
-    const data = await ProductModel.find({}).limit(6)
-    console.log(data)
+    // console.log(req.query.pageNo)
+    const {pageNo} = req.query;
+    const data = await ProductModel.find({}).limit(3*1).skip((parseInt(pageNo) - 1)*3)
     if(!data){
         return res.json({error:'Error in the database'})
     }
+    console.log(data,pageNo)
     return res.json({message:data})
 }
 exports.FindbyName = async (req,res) =>{
