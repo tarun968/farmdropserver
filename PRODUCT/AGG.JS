@@ -10,6 +10,15 @@ exports.FindAll = async (req,res) =>{
     console.log(data,pageNo)
     return res.json({message:data})
 }
+exports.FindAllProducts = async (req,res) =>{
+    const {pageNo} = req.query;
+    const data = await ProductModel.find({})
+    if(!data){
+        return res.json({error:'Error in the database'})
+    }
+    console.log(data,pageNo)
+    return res.json({message:data})
+}
 exports.FindbyName = async (req,res) =>{
     const query = req.query.Name
     // console.log('Query',query)

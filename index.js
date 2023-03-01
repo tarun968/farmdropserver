@@ -82,7 +82,7 @@ const { getUserByEmail, getAllUsers, updateUser,
 const { AddingNews, NewsComment, getNewsbyId,
     SubmitFormNews, getAllnews, getPhotoNews, getNewstoFront } = require('./INFO/func')
 const { SubmitForm, UpdateForm, SubmitForm2 } = require('./PRODUCT/form')
-const { FindbyName, FindbyAdder, FindbyID, FindbyRating, FindAll } = require('./PRODUCT/agg')
+const { FindbyName, FindbyAdder, FindbyID, FindbyRating, FindAll, FindAllProducts } = require('./PRODUCT/agg')
 const { createOrder, pushOrderInPurchaseList, updateStock, orderinit, orderverify, getOrderById } = require('./ORDER/func.js')
 const { getProductbyId } = require('./PRODUCT/func')
 const { Feedback, RatingCalc, getPhoto, productDelete } = require('./PRODUCT/func')
@@ -114,7 +114,8 @@ app.put("/update/status/admin/:adder", isSignedIn,isAuthenticated,updateStatus)
 
 app.post("/update-product/:product/item/:adder", isSignedIn, isAuthenticated, isAdmin, UpdateForm)
 app.get("/All-Products/:adder", isSignedIn, isAuthenticated, isAdmin, FindAll)
-app.get("/Products", FindAll)
+// app.get("/Products", FindAll)
+app.get("/Products", FindAllProducts)
 app.get("/Photo/:product", getPhoto)
 app.get("/Orders/admin/:adder", isSignedIn, isAuthenticated, isAdmin, getAllOrderstoAdmin)
 app.get("/News/:news", getNewstoFront)
