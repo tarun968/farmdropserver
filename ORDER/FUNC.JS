@@ -19,15 +19,7 @@ exports.getOrderById = (req, res, next, id) => {
         })
 }
 exports.userPurchaseList = (req, res) => {
-    console.log('user with the purchase', req.profile)
-    // Order.deleteMany({})
-    // Order.deleteMany({})
-    //     .exec((err, order) => {
-    //         if (err) {
-    //             return res.status(400).json({ error: 'NO ORDER IN THIS ACCOUNT' })
-    //         }
-    //         return res.json(order)
-    //     })
+    console.log('user with the purchase', req.query)
     Order.find({ user: req.profile._id })
         .exec((err, order) => {
             if (err) {

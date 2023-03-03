@@ -5,11 +5,11 @@ var userModel = require('./filemws')
 const { check, validationResult } = require('express-validator');
 router.post('/signin', async (req, res) => {
     try {
-        console.log("login me ")
+        // console.log("login me ")
         const record_to_find = await userModel.findOne({
             Email: req.body.email, Password: req.body.password
         })
-        console.log(record_to_find, req.body)
+        // console.log(record_to_find, req.body)
         if (!record_to_find) {
             res.json({ error: "No User Was Found" });
         }
@@ -23,7 +23,7 @@ router.post('/signin', async (req, res) => {
         return res.json({ Token, user: { _id, Email, Password, Role, FDMarket, Phone, Reference } })
 
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.json({ Message: "Error, Kindly Login Again" })
     }
 })
@@ -60,13 +60,13 @@ router.post('/signup',
         }),
     ]
     , async (req, res) => {
-        console.log(req.body);
+        // console.log(req.body);
 
-        console.log("====================")
+        // console.log("====================")
         try {
             const errors = validationResult(req);
-            console.log(req.body)
-            console.log(errors)
+            // console.log(req.body)
+            // console.log(errors)
             if (!errors.isEmpty()) {
                 return res.status(400).json({ errors: errors.array() });
             }
@@ -80,20 +80,20 @@ router.post('/signup',
             })
             await record_new.save();
             const token = await createToken(req.body.email);
-            console.log(token);
+            // console.log(token);
             res.cookie("user", token, {
                 httpOnly: true
             })
             return res.json({ record_new });
         }
         catch (err) {
-            console.log(err)
+            // console.log(err)
             return res.json({ errors: [{ 'msg': "Error in the SiginUp, Kindly Try again later" }] })
         }
     })
 
 router.post('/signout', async (req, res) => {
-    console.log('res', res)
+    // console.log('res', res)
     res.clearCookie('UserLoggedIN')
     // res.clearCookie('user')
     res.json({

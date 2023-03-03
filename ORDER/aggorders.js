@@ -26,7 +26,6 @@ exports.getStatus = (req, res) => {
     res.json(Order.schema.path("status").enumValues);
 };
 exports.getAllOrderstoAdmin = (req,res) => {
-    Order.deleteMany({})
     Order.find({}).exec((err, order) => {
         if (err) {
             return res.status(400).json({ error: 'Orders Not found' })
