@@ -2,7 +2,7 @@ var { expressjwt: jwtk } = require("express-jwt");
 // 
 exports.isAdmin = (req, res, next) => {
     try {
-        console.log("is admin profile", req.profile)
+        // console.log("is admin profile", req.profile)
     if (req.profile.Role != 1) {
             return res.json({ message: 'Acess denied as you are not an admin' })
         }
@@ -21,12 +21,12 @@ exports.isSignedIn = jwtk(
 })
 
 exports.isAuthenticated = (req, res, next) => {
-    console.log("req auth", req.auth)
-    console.log('req profile', req.profile)
+    // console.log("req auth", req.auth)
+    // console.log('req profile', req.profile)
     try {
-        console.log(req.profile._id.toString())
-        console.log("req auth is", req.auth)
-        console.log("req profile is", req.profile)
+        // console.log(req.profile._id.toString())
+        // console.log("req auth is", req.auth)
+        // console.log("req profile is", req.profile)
         let checker = req.profile && req.auth &&
             req.profile._id.toString() === req.auth._id
         if (!checker) {

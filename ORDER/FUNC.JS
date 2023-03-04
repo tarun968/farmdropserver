@@ -19,9 +19,9 @@ exports.getOrderById = (req, res, next, id) => {
         })
 }
 exports.userPurchaseList = (req, res) => {
-    console.log('user with the purchase', req.query)
+    console.log('user with the purchase', req.query.query)
     Order.find({ user: req.profile._id })
-        .exec((err, order) => {
+        .sort(req.query.query).exec((err, order) => {
             if (err) {
                 return res.status(400).json({ error: 'NO ORDER IN THIS ACCOUNT' })
             }

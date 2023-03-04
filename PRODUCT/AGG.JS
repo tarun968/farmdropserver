@@ -7,7 +7,7 @@ exports.FindAll = async (req,res) =>{
     if(!data){
         return res.json({error:'Error in the database'})
     }
-    console.log(data,pageNo)
+    console.log(data)
     return res.json({message:data})
 }
 exports.FindAllProducts = async (req,res) =>{

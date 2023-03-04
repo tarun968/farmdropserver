@@ -4,10 +4,10 @@ const _ = require('lodash')
 const fs = require('fs')
 // 
 exports.getNewsbyId = (req, res, next, id) => {
-    console.log("lets get the new by id")
+    // // console.log("lets get the new by id")
     newsModel.findOne({ _id: id }).exec((err, news) => {
         if (err || !news) {
-            console.log("9999")
+            // console.log("9999")
             return res.status(400).json({
                 error: "No News with such ID found in Db"
             })
@@ -30,7 +30,7 @@ exports.AddingNews = async (req, res) => {
         await record_new.save();
         return res.json({ record_new });
     } catch (err) {
-        console.log('error', err)
+        // console.log('error', err)
     }
 }
 exports.NewsComment = async (req, res) => {
@@ -38,9 +38,9 @@ exports.NewsComment = async (req, res) => {
 
         let form = new formidable.IncomingForm()
     form.keepExtensions = true
-    console.log("pro",req.profile.Email)
+    // console.log("pro",req.profile.Email)
     form.parse(req, (err, fields, file) => {
-        console.log("____",fields)
+        // console.log("____",fields)
         var comnts = {
             commentedby: req.profile.Email,
             commentdesc: fields.commentdesc,
@@ -59,9 +59,9 @@ exports.NewsComment = async (req, res) => {
                 res.json({ Message: "Updated successfully" })
             })    
     })
-        console.log(req.body, req.params)
+        // console.log(req.body, req.params)
             } catch (e) {
-        console.log("", e)
+        // console.log("", e)
     }
 }
 
@@ -72,16 +72,16 @@ exports.SubmitFormNews = (req, res) => {
     form.keepExtensions = true
     form.parse(req, (err, fields, file) => {
         if (err) {
-            console.log("error")
-            console.log(err)
+            // console.log("error")
+            // console.log(err)
             return res.status(400).json({
                 error: 'Problem in the image'
             })
         }
         let News = newsModel(fields)
-        console.log('fields are')
-        console.log('fields are', fields)
-        console.log(file)
+        // console.log('fields are')
+        // console.log('fields are', fields)
+        // console.log(file)
         if (file.photo) {
             if (file.photo.size > 8300000) {
                 return res.status(400).json({
@@ -89,16 +89,16 @@ exports.SubmitFormNews = (req, res) => {
                 })
             }
         }
-        console.log('here', file.ImageNews.type)
+        // console.log('here', file.ImageNews.type)
         News.Adder = req.profile.Email
         News.DateNews = new Date()
-        // console.log(product)
+        // // console.log(product)
         News.ImageNews.data = fs.readFileSync(file.ImageNews.filepath)
         News.ImageNews.contentType = file.ImageNews.type
-        console.log(file.ImageNews.type)
+        // console.log(file.ImageNews.type)
         News.save((errors, prod) => {
             if (errors) {
-                console.log('error', errors)
+                // console.log('error', errors)
                 return res.json({
                     Message: 'Problem in the fields'
                 })
@@ -111,7 +111,7 @@ exports.SubmitFormNews = (req, res) => {
 
 exports.getAllnews = async (req, res) => {
     const AllNews = await newsModel.find({})
-    // console.log("All",AllNews)
+    // // console.log("All",AllNews)
     if (!AllNews) {
         return res.status(400).json({ error: 'no one found' })
     }
@@ -119,7 +119,7 @@ exports.getAllnews = async (req, res) => {
 }
 
 exports.getNewstoFront = async (req, res) => {
-    // console.log(req.body.ID)
+    // // console.log(req.body.ID)
     const News = await newsModel.find({ _id: req.params.news }).exec()
     if (!News) {
         return res.json({ Error: "Sorry" })
@@ -129,7 +129,7 @@ exports.getNewstoFront = async (req, res) => {
 
 
 exports.getPhotoNews = async (req, res) => {
-    console.log("news item")
+    // console.log("news item")
     if (req.news_item.ImageNews.data) {
         res.set('Content-Type', req.news_item.ImageNews.contentType)
         return res.send(req.news_item.ImageNews.data)
