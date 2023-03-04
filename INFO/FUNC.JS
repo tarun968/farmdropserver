@@ -18,6 +18,7 @@ exports.getNewsbyId = (req, res, next, id) => {
 }
 
 exports.AddingNews = async (req, res) => {
+    console.log(req.body)
     try {
         const record_new = await new newsModel({
             Headline: req.body.Heading,

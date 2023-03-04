@@ -45,65 +45,7 @@ exports.getAllshopBycountry = async (req, res) => {
 }
 
 exports.SubmitLocation = (req, res) => {
-    console.log("form ")
-    let form = new formidable.IncomingForm()
-    form.keepExtensions = true
-    console.log("form ")
-    form.parse(req, (err, fields, file) => {
-        if (err) {
-            console.log("error")
-            console.log(err)
-            return res.status(400).json({
-                error: 'Problem in the image'
-            })
-        }
-        // }
-        // fields {
-        //   NameofLocations: 'Tarun Sinha',
-        //   NameofOwner: 'Tarun Sinha',
-        //   Country: 'Surat',
-        //   City: 'Surat',
-        //   State: 'Gujarat',
-        //   Address: 'J-5 Rajlaxmi Society',
-        //   ShopID: 'SHOP981_ER712'
-        // }
-        // console.log("biody",req.body)
-        // console.log("files", file)
-        // console.log("fields", fields)
-        // console.log(fields)
-        let shop = ShopModel(fields)
-        // console.log('nO1', file[0])
-        // console.log('nO2', file[1])
-        // console.log('nO3',file[2])        
-        shop.AddedBy = req.profile.Email
-        shop.Date = new Date()
-        // var ImagesShop = []
-        for (x in file) {
-            // console.log("file path", file[x].type)
-            // console.log("file path", file[x].filepath,)
-            if (x.photo) {
-                if (file[x].size > 8300000) {
-                    return res.status(400).json({
-                        error: 'Problem in the image and its size'
-                    })
-                }
-            }
-            shop.ImagesShop.push({
-                data: fs.readFileSync(file[x].filepath),
-                contentType: file[x].type
-            })
-        }
-        // console.log("images shop", ImagesShop)
-        shop.save((errors, prod) => {
-            if (errors) {
-                console.log('error', errors)
-                return res.json({
-                    error: 'Problem in the fields'
-                })
-            }
-            res.json(prod)
-        })
-    })
+    console.log(req.body,req.file,req.files)
 }
 
 exports.SubmitLocationsImage = (req, res) => {

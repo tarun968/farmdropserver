@@ -146,7 +146,7 @@ app.post("/verify/:adder", isSignedIn, isAuthenticated, orderverify)
 app.post("/order-purchase/:adder", isSignedIn, isAuthenticated, pushOrderInPurchaseList, updateStock, createOrder)
 
 
-app.post("/add-shop/:adder", isSignedIn, isAuthenticated, isAdmin, SubmitLocation)
+app.post("/add-shop/:adder", isSignedIn, isAuthenticated, isAdmin, upload.single("imagesField"),SubmitLocation)
 app.post("/update-shop/:location/by/:adder", isSignedIn, isAuthenticated, isAdmin, SubmitLocationsImage)
 app.use("/", Auths)
 app.listen(PORT, () => {
