@@ -76,10 +76,6 @@ exports.SubmitForm = (req, res) => {
         console.log('here', file.ImageProduct.type)
         product.AddedBy = req.profile.Email
         product.Date = new Date()
-        console.log(product)
-        // const result = cloudinary.uploader.upload(image, {
-        //     folder: "products",
-        // })
         product.ImageProduct.data = fs.readFileSync(file.ImageProduct.filepath)
         product.ImageProduct.contentType = file.ImageProduct.type
         console.log(file.ImageProduct.type)

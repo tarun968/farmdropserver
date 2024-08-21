@@ -30,7 +30,6 @@ exports.userPurchaseList = (req, res) => {
 }
 
 exports.createOrder = (req, res) => {
-
     console.log("entering the createorder",req.profile,req.body)
     req.body.order.user = req.profile
     var amount = 0;
@@ -60,7 +59,6 @@ exports.createOrder = (req, res) => {
         }
     })
 }
-
 
 exports.pushOrderInPurchaseList = (req, res, next) => {
     let purchases = [];
