@@ -30,7 +30,6 @@ exports.userPurchaseList = (req, res) => {
 }
 
 exports.createOrder = (req, res) => {
-
     console.log("entering the createorder",req.profile,req.body)
     req.body.order.user = req.profile
     var amount = 0;
@@ -51,22 +50,16 @@ exports.createOrder = (req, res) => {
     order.status = "Processing"
     order.save((err, order) => {
         if (err || !order) {
-            console.log("error", err)
             return res.status(400).json({ error: 'Error in the user order' })
         }
         else {
-            console.log("hui ", order)
             return res.status(200).json(order);
         }
     })
 }
 
-
 exports.pushOrderInPurchaseList = (req, res, next) => {
     let purchases = [];
-    console.log("entrered here")
-    console.log(req.body)
-    console.log("entering the push order in purchase list",req.body)
     req.body.order.forEach(element => {
         console.log("element", element)
         purchases.push({
@@ -74,7 +67,6 @@ exports.pushOrderInPurchaseList = (req, res, next) => {
             NameofProduct: element.NameofProduct,
             ProductID: element.ProductID,
             Quantity: element.Quantity,
-            // transaction_id:element.transaction_id,
             Price: element.Price
         })
     })
@@ -141,15 +133,12 @@ exports.getOrderStatus = (req, res) => {
 
 
 exports.orderinit = async (req, res
-    // ,next
     ) => {
     try {
-        // console.log("req",req.body.order)
         const instance = new Razorpay({
             key_id: process.env.KEY_ID,
             key_secret: process.env.KEY_SECRET,
         });
-        // console.log("amount", typeof(req.body.amount))
         const options = {
             amount: req.body.amount * 100,
             currency: "INR",
@@ -158,10 +147,8 @@ exports.orderinit = async (req, res
 
         instance.orders.create(options, (error, order) => {
             if (error) {
-                // console.log(error);
                 return res.status(500).json({ message: "Something Went Wrong!" });
             }
-            // console.log("payment done sucessfully", order)
             req.payment = order
             res.status(200).json({ data: order });
         });
@@ -177,7 +164,6 @@ exports.orderverify  =async (req, res
         console.log('req payment',req.payment)
         const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
             req.body;
-        // console.log("razor pay",req.payment)
         const sign = razorpay_order_id + "|" + razorpay_payment_id;
         const expectedSign = crypto
             .createHmac("sha256", process.env.KEY_SECRET)
@@ -187,7 +173,6 @@ exports.orderverify  =async (req, res
         if (razorpay_signature === expectedSign) {
             console.log("",razorpay_signature)
             return res.status(200).json({ message: "Payment verified successfully" });
-            // next();/
         } else {
             return res.status(400).json({ message: "Invalid signature sent!" });
         }

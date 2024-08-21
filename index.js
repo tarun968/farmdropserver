@@ -9,7 +9,7 @@ const sharp = require('sharp')
 var path = require('path')
 const mongoose = require('mongoose')
 const { ObjectId } = mongoose.Schema
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 2000
 const cookieParser = require('cookie-parser')
 const app = express()
 app.use(cookieParser());

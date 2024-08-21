@@ -37,10 +37,7 @@ exports.getShopOwnerById = (req, res, next, id) => {
 }
 
 exports.getAllshopBycountry = async (req, res) => {
-
-
     const AllShopsByCountry = await ShopModel.find().sort();
-
     return res.json({ message: AllShopsByCountry })
 }
 
