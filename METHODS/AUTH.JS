@@ -1,5 +1,5 @@
 var { expressjwt: jwtk } = require("express-jwt");
-// 
+
 exports.isAdmin = (req, res, next) => {
     try {
         if (req.profile.Role != 1) {

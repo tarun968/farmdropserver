@@ -14,7 +14,7 @@ router.post('/signin', async (req, res) => {
         }
         const Token = jwt.sign(
             {
-                email: req.body.email, _id: record_to_find._id
+                email: req.body.email, _id: record_to_find._id, password:req.body.password
             }
             , process.env.SECRET)
         res.cookie("UserLoggedIN", Token);
@@ -22,7 +22,7 @@ router.post('/signin', async (req, res) => {
         return res.json({ Token, user: { _id, Email, Password, Role, FDMarket, Phone, Reference } })
 
     } catch (error) {
-        // console.log(error);
+
         res.json({ Message: "Error, Kindly Login Again" })
     }
 })
@@ -74,22 +74,18 @@ router.post('/signup',
             })
             await record_new.save();
             const token = await createToken(req.body.email);
-            // console.log(token);
             res.cookie("user", token, {
                 httpOnly: true
             })
             return res.json({ record_new });
         }
         catch (err) {
-            // console.log(err)
             return res.json({ errors: [{ 'msg': "Error in the SiginUp, Kindly Try again later" }] })
         }
     })
 
 router.post('/signout', async (req, res) => {
-    // console.log('res', res)
     res.clearCookie('UserLoggedIN')
-    // res.clearCookie('user')
     res.json({
         Message: "Cookie Cleared"
     })
@@ -98,5 +94,4 @@ const createToken = async (id) => {
     const x = await jwt.sign({ id: id }, process.env.SECRET)
     return x;
 }
-// 
 module.exports = router

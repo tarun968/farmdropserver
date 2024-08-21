@@ -1,7 +1,7 @@
 const ProductModel = require('./productsDB')
 const formidable = require('formidable')
 const _ = require('lodash')
-// 
+
 const cloudinary = require('cloudinary').v2;
 cloudinary.config({
   cloud_name: "dgfbgtpnd",

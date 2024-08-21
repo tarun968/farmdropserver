@@ -1,7 +1,6 @@
 const ProductModel = require('./productsDB')
-// 
+ 
 exports.FindAll = async (req,res) =>{
-    // console.log(req.query.pageNo)
     const {pageNo} = req.query;
     const data = await ProductModel.find({}).limit(3*1).skip((parseInt(pageNo) - 1)*3)
     if(!data){
@@ -21,11 +20,9 @@ exports.FindAllProducts = async (req,res) =>{
 }
 exports.FindbyName = async (req,res) =>{
     const query = req.query.Name
-    // console.log('Query',query)
     const data = await ProductModel.find({})
     var array = [];
     data.forEach(element => {
-        // console.log('x',element)
         if (element.NameofProduct.toLowerCase().includes(query)){
             array.push(element)
         }
@@ -34,11 +31,9 @@ exports.FindbyName = async (req,res) =>{
 }
 exports.FindbyID = async (req,res) =>{
     const query = req.query.ID
-    // console.log('Query',query)
     const data = await ProductModel.find({})
     var array = [];
     data.forEach(element => {
-        // console.log('x',element._id.toString())
         if (element._id.toString().toLowerCase().includes(query)){
             array.push(element)
         }
@@ -47,11 +42,9 @@ exports.FindbyID = async (req,res) =>{
 }
 exports.FindbyAdder = async (req,res) =>{
     const query = req.query.Adder
-    // console.log('Query',query)
     const data = await ProductModel.find({})
     var array = [];
     data.forEach(element => {
-        // console.log('x',element)
         if (element.AddedBy.toLowerCase().includes(query)){
             array.push(element)
         }
@@ -64,7 +57,6 @@ exports.FindbyRating = async (req,res) =>{
     const data = await ProductModel.find({})
     var array = [];
     data.forEach(element => {
-        // console.log('x',element)
         if (element.Rating >= query){
             array.push(element)
         }
