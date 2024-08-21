@@ -2,12 +2,8 @@ var { expressjwt: jwtk } = require("express-jwt");
 // 
 exports.isAdmin = (req, res, next) => {
     try {
-        // console.log("is admin profile", req.profile)
         if (req.profile.Role != 1) {
             return res.json({ message: 'Access denied for non admin ' })
-        }
-        else if (req.profile.Role == 1) {
-            return res.json({ message: 'Access denied to everyone ' })
         }
         else {
             next()
