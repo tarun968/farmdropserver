@@ -5,11 +5,10 @@ var userModel = require('./filemws')
 const { check, validationResult } = require('express-validator');
 router.post('/signin', async (req, res) => {
     try {
-        // console.log("login me ")
         const record_to_find = await userModel.findOne({
             Email: req.body.email, Password: req.body.password
         })
-        // console.log(record_to_find, req.body)
+        
         if (!record_to_find) {
             res.json({ error: "No User Was Found" });
         }
@@ -60,13 +59,8 @@ router.post('/signup',
         }),
     ]
     , async (req, res) => {
-        // console.log(req.body);
-
-        // console.log("====================")
         try {
             const errors = validationResult(req);
-            // console.log(req.body)
-            // console.log(errors)
             if (!errors.isEmpty()) {
                 return res.status(400).json({ errors: errors.array() });
             }
@@ -101,7 +95,7 @@ router.post('/signout', async (req, res) => {
     })
 })
 const createToken = async (id) => {
-    const x = jwt.sign({ id: id }, process.env.SECRET)
+    const x = await jwt.sign({ id: id }, process.env.SECRET)
     return x;
 }
 // 

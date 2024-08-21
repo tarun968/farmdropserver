@@ -45,7 +45,6 @@ const Products = new Schema({
             type: String,
             required: true
         }
-    
     },
     Quantity:{
         type:Number,
